@@ -15,6 +15,25 @@
     <link rel="stylesheet" href="./assets/vendor/icon-set/style.css">
     <!-- CSS Front Template -->
     <link rel="stylesheet" href="./assets/css/theme.min.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBFwJkHQHb4IuU0Xuloba3d9FSZayB1eqw",
+        authDomain: "numberpredictor-prd.firebaseapp.com",
+        databaseURL: "https://numberpredictor-prd-default-rtdb.firebaseio.com",
+        projectId: "numberpredictor-prd",
+        storageBucket: "numberpredictor-prd.appspot.com",
+        messagingSenderId: "333354525993",
+        appId: "1:333354525993:web:b8b713f2e609d9c545c338"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
   </head>
 
   <body class="footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl">
@@ -205,23 +224,18 @@
                 <h1 class="page-header-title">Welcome, Markus!</h1>
               </div>
 
-              <div class="col-auto">
-                <!-- Daterangepicker -->
-                <button id="js-daterangepicker-predefined" class="btn btn-sm btn-ghost-light dropdown-toggle">
-                  <i class="tio-date-range"></i>
-                  <span class="js-daterangepicker-predefined-preview ml-1"></span>
-                </button>
-                <!-- End Daterangepicker -->
+              <div class="col-auto" style="color:white">
+                  <i class="tio-date-range"></i> Fri, 12th April
               </div>
             </div>
             <!-- End Row -->
           </div>
 
           <!-- Screens -->
-          <div class="row gx-2 gx-lg-3">
-            <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-              <!-- Card -->
-              <a class="card card-hover-shadow h-100" href="#">
+          <div id="screenContainer" class="row gx-2 gx-lg-3">
+            <!-- Card -->
+            <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5" style="display: none;">
+              <div class="card card-hover-shadow h-100">
                 <div class="card-body">
                   <h6 class="card-subtitle">Screen ID</h6>
 
@@ -229,7 +243,6 @@
                     <div class="col-6">
                       <span class="card-title h2">MRK1</span>
                     </div>
-
                     <div class="col-6 text-center">
                       <!-- <button type="button" class="btn btn-soft-danger btn-pill mx-auto">Screen in Use</button> -->
                       <button class="btn btn-soft-danger btn-pill" type="button" disabled>
@@ -239,81 +252,14 @@
                     </div>
                   </div>
                   <!-- End Row -->
-
                   <h4>
                     <span class="text-body mr-1">Status</span>
                     <span class="badge badge-soft-success">Active</span>
                   </h4>
-                </div>
-              </a>
-              <!-- End Card -->
-            </div>
-
-            <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-              <!-- Card -->
-              <a class="card card-hover-shadow h-100" href="#">
-                <div class="card-body">
-                  <h6 class="card-subtitle">Screen ID</h6>
-
-                  <div class="row align-items-center gx-2 mb-1">
-                    <div class="col-6">
-                      <span class="card-title h2">MRK2</span>
-                    </div>
-
-                    <div class="col-6 text-center">
-                      <button type="button" class="btn btn-primary btn-pill mx-auto">Unlock Screen</button>
-                    </div>
-                  </div>
-                  <!-- End Row -->
-
-                  <h4>
-                    <span class="text-body mr-1">Status</span>
-                    <span class="badge badge-soft-success">Active</span>
-                  </h4>
-                </div>
-              </a>
-              <!-- End Card -->
-            </div>
-
-            <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-              <!-- Card -->
-              <a class="card card-hover-shadow h-100" href="#">
-                <div class="card-body">
-                  <h6 class="card-subtitle">Screen ID</h6>
-
-                  <div class="row align-items-center gx-2 mb-1">
-                    <div class="col-6">
-                      <span class="card-title h2">MRK3</span>
-                    </div>
-
-                    <div class="col-6 text-center">
-                      <button type="button" class="btn btn-primary btn-pill mx-auto">Unlock Screen</button>
-                    </div>
-                  </div>
-                  <!-- End Row -->
-
-                  <h4>
-                    <span class="text-body mr-1">Status</span>
-                    <span class="badge badge-soft-danger">Inactive</span>
-                  </h4>
-                </div>
-              </a>
-              <!-- End Card -->
-            </div>
-
-            <!-- Card -->
-            <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="card-header-title">New Screen</h5>
-                </div>
-                <div class="card-body text-center">
-                  <a href="#" class="btn btn-soft-success btn-pill">Add New Screen</a>
                 </div>
               </div>
             </div>
             <!-- End Card -->
-
           </div>
           <!-- End Screens -->
         </div>
@@ -322,46 +268,33 @@
 
       <!-- Content -->
       <div class="content container-fluid">
-        <!-- Card -->
-        <div class="card mb-3 mb-lg-5 shadow-lg">
+        <!-- Weekly Sales -->
+        <div class="card h-100 mb-3 mb-lg-5">
           <!-- Header -->
           <div class="card-header">
-            <h4 class="card-header-title">Recent projects</h4>
-
-            <!-- Nav -->
-            <ul class="nav nav-segment nav-fill" id="projectsTab" role="tablist">
-              <li class="nav-item" data-toggle="chart" data-datasets="0" data-trigger="click" data-action="toggle">
-                <a class="nav-link active" href="javascript:;" data-toggle="tab">This week</a>
-              </li>
-              <li class="nav-item" data-toggle="chart" data-datasets="1" data-trigger="click" data-action="toggle">
-                <a class="nav-link" href="javascript:;" data-toggle="tab">This month</a>
-              </li>
-            </ul>
-            <!-- End Nav -->
+            <h5 class="card-header-title">Weekly Players</h5>
           </div>
           <!-- End Header -->
 
           <!-- Body -->
           <div class="card-body">
-            <div class="row align-items-sm-center mb-4">
-              <div class="col-sm mb-3 mb-sm-0">
+            <div class="row mb-4">
+              <div class="col-sm mb-2 mb-sm-0">
                 <div class="d-flex align-items-center">
-                  <span class="h1 mb-0">$7,431.14 USD</span>
-
-                  <span class="text-success ml-2">
-                    <i class="tio-trending-up"></i> 25.3%
+                  <span class="h1 mb-0 text-success" id="countTrend">
+                    <i class="tio-trending-up"></i> 35%
                   </span>
                 </div>
               </div>
 
-              <div class="col-sm-auto">
+              <div class="col-sm-auto align-self-sm-end">
                 <!-- Legend Indicators -->
                 <div class="row font-size-sm">
                   <div class="col-auto">
-                    <span class="legend-indicator bg-primary"></span> Income
+                    <span class="legend-indicator bg-primary"></span> This Week
                   </div>
                   <div class="col-auto">
-                    <span class="legend-indicator bg-info"></span> Expenses
+                    <span class="legend-indicator bg-ghost-secondary"></span> Last Week
                   </div>
                 </div>
                 <!-- End Legend Indicators -->
@@ -370,94 +303,76 @@
             <!-- End Row -->
 
             <!-- Bar Chart -->
-            <div class="chartjs-custom" style="height: 18rem;">
-              <canvas id="updatingData"
-                      data-hs-chartjs-options='{
-                        "type": "line",
-                        "data": {
-                           "labels": ["Feb","Jan","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-                           "datasets": [{
-                            "backgroundColor": ["rgba(55, 125, 255, .5)", "rgba(255, 255, 255, .2)"],
-                            "borderColor": "#377dff",
-                            "borderWidth": 2,
-                            "pointRadius": 0,
-                            "hoverBorderColor": "#377dff",
-                            "pointBackgroundColor": "#377dff",
-                            "pointBorderColor": "#fff",
-                            "pointHoverRadius": 0
-                          },
-                          {
-                            "backgroundColor": ["rgba(0, 201, 219, .5)", "rgba(255, 255, 255, .2)"],
-                            "borderColor": "#00c9db",
-                            "borderWidth": 2,
-                            "pointRadius": 0,
-                            "hoverBorderColor": "#00c9db",
-                            "pointBackgroundColor": "#00c9db",
-                            "pointBorderColor": "#fff",
-                            "pointHoverRadius": 0
-                          }]
-                        },
-                        "options": {
-                          "gradientPosition": {"y1": 200},
-                           "scales": {
-                              "yAxes": [{
-                                "gridLines": {
-                                  "color": "#e7eaf3",
-                                  "drawBorder": false,
-                                  "zeroLineColor": "#e7eaf3"
-                                },
-                                "ticks": {
-                                  "min": 0,
-                                  "max": 100,
-                                  "stepSize": 20,
-                                  "fontColor": "#97a4af",
-                                  "fontFamily": "Open Sans, sans-serif",
-                                  "padding": 10,
-                                  "postfix": "k"
-                                }
-                              }],
-                              "xAxes": [{
-                                "gridLines": {
-                                  "display": false,
-                                  "drawBorder": false
-                                },
-                                "ticks": {
-                                  "fontSize": 12,
-                                  "fontColor": "#97a4af",
-                                  "fontFamily": "Open Sans, sans-serif",
-                                  "padding": 5
-                                }
-                              }]
-                          },
-                          "tooltips": {
-                            "prefix": "$",
-                            "postfix": "k",
-                            "hasIndicator": true,
-                            "mode": "index",
-                            "intersect": false,
-                            "lineMode": true,
-                            "lineWithLineColor": "rgba(19, 33, 68, 0.075)"
-                          },
-                          "hover": {
-                            "mode": "nearest",
-                            "intersect": true
-                          }
-                        }
-                      }'>
-              </canvas>
-            </div>
-            <!-- End Bar Chart -->
+           <!-- Bar Chart -->
+           <div class="chartjs-custom">
+            <canvas id="updatingData" style="height: 20rem;"
+            data-hs-chartjs-options='{
+              "type": "bar",
+              "data": {
+                "labels": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "datasets": [{
+                  "data": [],
+                  "backgroundColor": "#377dff",
+                  "hoverBackgroundColor": "#377dff",
+                  "borderColor": "#377dff"
+                },
+                {
+                  "data": [],
+                  "backgroundColor": "#e7eaf3",
+                  "borderColor": "#e7eaf3"
+                }]
+              },
+              "options": {
+                "scales": {
+                  "yAxes": [{
+                    "gridLines": {
+                      "color": "#e7eaf3",
+                      "drawBorder": false,
+                      "zeroLineColor": "#e7eaf3"
+                    },
+                    "ticks": {
+                      "beginAtZero": true,
+                      "fontSize": 12,
+                      "fontColor": "#97a4af",
+                      "fontFamily": "Open Sans, sans-serif",
+                      "padding": 10,
+                      "postfix": ""
+                    }
+                  }],
+                  "xAxes": [{
+                    "gridLines": {
+                      "display": false,
+                      "drawBorder": false
+                    },
+                    "ticks": {
+                      "fontSize": 12,
+                      "fontColor": "#97a4af",
+                      "fontFamily": "Open Sans, sans-serif",
+                      "padding": 5
+                    },
+                    "categoryPercentage": 0.5,
+                    "maxBarThickness": "35"
+                  }]
+                },
+                "cornerRadius": 2,
+                "tooltips": {
+                  "prefix": "",
+                  "hasIndicator": true,
+                  "mode": "index",
+                  "intersect": false
+                },
+                "hover": {
+                  "mode": "nearest",
+                  "intersect": true
+                }
+              }
+            }'></canvas>
+          </div>
+          <!-- End Bar Chart -->
           </div>
           <!-- End Body -->
-
-          <!-- Card Footer -->
-          <a class="card-footer text-center" href="projects.html">
-            View entire report <i class="tio-chevron-right"></i>
-          </a>
-          <!-- End Card Footer -->
         </div>
-        <!-- End Card -->
-        
+        <!-- End Weekly Sales -->
       </div>
       <!-- End Content -->
 
@@ -494,317 +409,9 @@
     
     <!-- JS Front -->
     <script src="./assets/js/theme.min.js"></script>
-
-    <!-- JS Plugins Init. -->
-    <script>
-      $(document).on('ready', function () {
-        // ONLY DEV
-        // =======================================================
-        
-          if (window.localStorage.getItem('hs-builder-popover') === null) {
-            $('#builderPopover').popover('show')
-              .on('shown.bs.popover', function () {
-                $('.popover').last().addClass('popover-dark')
-              });
-
-            $(document).on('click', '#closeBuilderPopover' , function() {
-              window.localStorage.setItem('hs-builder-popover', true);
-              $('#builderPopover').popover('dispose');
-            });
-          } else {
-            $('#builderPopover').on('show.bs.popover', function () {
-              return false
-            });
-          }
-        
-        // END ONLY DEV
-        // =======================================================
-
-
-        // BUILDER TOGGLE INVOKER
-        // =======================================================
-        $('.js-navbar-vertical-aside-toggle-invoker').click(function () {
-          $('.js-navbar-vertical-aside-toggle-invoker i').tooltip('hide');
-        });
-
-        
-          // INITIALIZATION OF MEGA MENU
-          // =======================================================
-          var megaMenu = new HSMegaMenu($('.js-mega-menu'), {
-            desktop: {
-              position: 'left'
-            }
-          }).init();
-        
-
-        
-        // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
-        // =======================================================
-        var sidebar = $('.js-navbar-vertical-aside').hsSideNav();
-
-        
-        // INITIALIZATION OF TOOLTIP IN NAVBAR VERTICAL MENU
-        // =======================================================
-        $('.js-nav-tooltip-link').tooltip({ boundary: 'window' })
-
-        $(".js-nav-tooltip-link").on("show.bs.tooltip", function(e) {
-          if (!$("body").hasClass("navbar-vertical-aside-mini-mode")) {
-            return false;
-          }
-        });
-
-        
-        // INITIALIZATION OF UNFOLD
-        // =======================================================
-        $('.js-hs-unfold-invoker').each(function () {
-          var unfold = new HSUnfold($(this)).init();
-        });
-
-        
-        // INITIALIZATION OF FORM SEARCH
-        // =======================================================
-        $('.js-form-search').each(function () {
-          new HSFormSearch($(this)).init()
-        });
-
-        
-        // INITIALIZATION OF NAV SCROLLER
-        // =======================================================
-        $('.js-nav-scroller').each(function () {
-          new HsNavScroller($(this)).init()
-        });
-
-        
-        // INITIALIZATION OF CHARTJS
-        // =======================================================
-        $('.js-chart').each(function () {
-          $.HSCore.components.HSChartJS.init($(this));
-        });
-
-        
-        // INITIALIZATION OF CHARTJS
-        // =======================================================
-        var updatingChartDatasets = [
-          [
-            [18,51,60,38,88,50,40,52,88,80,60,70],
-            [27,38,60,77,40,50,49,29,42,27,42,50]
-          ],
-          [
-            [77,40,50,49,27,38,60,42,50,29,42,27],
-            [60,38,18,51,88,50,40,52,60,70,88,80]
-          ]
-        ]
-
-        
-        // INITIALIZATION OF CHARTJS
-        // =======================================================
-        var updatingChart = $.HSCore.components.HSChartJS.init($('#updatingData'), {
-          data: {
-            datasets: [
-              {
-                data: updatingChartDatasets[0][0]
-              },
-              {
-                data: updatingChartDatasets[0][1]
-              }
-            ]
-          }
-        });
-
-        // Call when tab is clicked
-        $('[data-toggle="chart"]').click(function(e) {
-          let keyDataset = $(e.currentTarget).attr('data-datasets')
-
-          // Update datasets for chart
-          updatingChart.data.datasets.forEach(function(dataset, key) {
-             dataset.data = updatingChartDatasets[keyDataset][key];
-          });
-          updatingChart.update();
-        })
-
-        
-        // INITIALIZATION OF CHARTJS
-        // =======================================================
-        $.HSCore.components.HSChartJS.init($('.js-chartjs-doughnut-half'), {
-          options: {
-            tooltips: {
-              postfix: "%"
-            },
-            cutoutPercentage: 85,
-            rotation: 1 * Math.PI,
-            circumference: 1 * Math.PI
-          }
-        });
-
-        
-        // INITIALIZATION OF DATERANGEPICKER
-        // =======================================================
-        $('.js-daterangepicker').daterangepicker();
-
-        $('.js-daterangepicker-times').daterangepicker({
-          timePicker: true,
-          startDate: moment().startOf('hour'),
-          endDate: moment().startOf('hour').add(32, 'hour'),
-          locale: {
-            format: 'M/DD hh:mm A'
-          }
-        });
-
-        var start = moment();
-        var end = moment();
-
-        function cb(start, end) {
-          $('#js-daterangepicker-predefined .js-daterangepicker-predefined-preview').html(start.format('MMM D') + ' - ' + end.format('MMM D, YYYY'));
-        }
-
-        $('#js-daterangepicker-predefined').daterangepicker({
-          startDate: start,
-          endDate: end,
-          ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-          }
-        }, cb);
-
-        cb(start, end);
-
-        
-        // INITIALIZATION OF JVECTORMAP
-        // =======================================================
-        var markers = [
-          {
-            "latLng": [38, -97],
-            "name": "United States",
-            "active": 200,
-            "new": 40,
-            "flag": "./assets/vendor/flag-icon-css/flags/1x1/us.svg",
-            "code": "US"
-          },
-          {
-            "latLng": [20, 77],
-            "name": "India",
-            "active": 300,
-            "new": 100,
-            "flag": "./assets/vendor/flag-icon-css/flags/1x1/in.svg",
-            "code": "IN"
-          },
-          {
-            "latLng": [60, -105],
-            "name": "Canada",
-            "active": 400,
-            "new": 500,
-            "flag": "./assets/vendor/flag-icon-css/flags/1x1/ca.svg",
-            "code": "CA"
-          },
-          {
-            "latLng": [51, 9],
-            "name": "Germany",
-            "active": 120,
-            "new": 600,
-            "flag": "./assets/vendor/flag-icon-css/flags/1x1/de.svg",
-            "code": "DE"
-          },
-          {
-            "latLng": [54, -2],
-            "name": "United Kingdom",
-            "active": 140,
-            "new": 100,
-            "flag": "./assets/vendor/flag-icon-css/flags/1x1/gb.svg",
-            "code": "GB"
-          },
-          {
-            "latLng": [1.3, 103.8],
-            "name": "Singapore",
-            "active": 56,
-            "new": 0,
-            "flag": "./assets/vendor/flag-icon-css/flags/1x1/sg.svg",
-            "code": "SG"
-          },
-          {
-            "latLng": [9.0, 8.6],
-            "name": "Nigeria",
-            "active": 34,
-            "new": 2,
-            "flag": "./assets/vendor/flag-icon-css/flags/1x1/ng.svg",
-            "code": "NG"
-          },
-          {
-            "latLng": [61.5, 105.3],
-            "name": "Russia",
-            "active": 135,
-            "new": 46,
-            "flag": "./assets/vendor/flag-icon-css/flags/1x1/ru.svg",
-            "code": "RU"
-          },
-          {
-            "latLng": [35.8, 104.1],
-            "name": "China",
-            "active": 325,
-            "new": 75,
-            "flag": "./assets/vendor/flag-icon-css/flags/1x1/cn.svg",
-            "code": "CN"
-          },
-          {
-            "latLng": [-10, -51],
-            "name": "Brazil",
-            "active": 242,
-            "new": 17,
-            "flag": "./assets/vendor/flag-icon-css/flags/1x1/br.svg",
-            "code": "BR"
-          }
-        ]
-
-        $('.js-jvectormap').each(function () {
-          var jVectorMap = $.HSCore.components.HSJVectorMap.init($(this), {
-            markers: markers,
-            onRegionTipShow: function(e, el, code){
-              let marker = markers.find(function (marker) {
-                return marker.code == code
-              });
-
-              if (marker) {
-                el.html(
-                  '<span class="d-flex align-items-center mb-2">' +
-                    '<img class="avatar avatar-xss avatar-circle mr-2" src="' + marker['flag'] + '" alt="Flag">' +
-                    '<span class="h5 mb-0">' + marker['name'] + '</span>' +
-                  '</span>' +
-                  '<dl class="row" style="max-width: 10rem;">' +
-                    '<dt class="col-sm-6 mb-0">Active:</dt>' +
-                    '<dd class="col-sm-6 text-sm-right mb-0">' + marker['active'] + '</dd>' +
-                    '<dt class="col-sm-6 mb-0">New:</dt>' +
-                    '<dd class="col-sm-6 text-sm-right mb-0">' + marker['new'] + '</dd>' +
-                  '</dl>'
-                );
-              } else {
-                return false;
-              }
-            },
-            onMarkerTipShow: function(e, el, code){
-              el.html(
-                '<span class="d-flex align-items-center mb-2">' +
-                  '<img class="avatar avatar-xss avatar-circle mr-2" src="' + markers[code]['flag'] + '" alt="Flag">' +
-                  '<span class="h5 mb-0">' + markers[code]['name'] + '</span>' +
-                '</span>' +
-                '<dl class="row" style="max-width: 10rem;">' +
-                  '<dt class="col-sm-6 mb-0">Active:</dt>' +
-                  '<dd class="col-sm-6 text-sm-right mb-0">' + markers[code]['active'] + '</dd>' +
-                  '<dt class="col-sm-6 mb-0">New:</dt>' +
-                  '<dd class="col-sm-6 text-sm-right mb-0">' + markers[code]['new'] + '</dd>' +
-                '</dl>'
-              );
-            }
-          });
-        });
-      });
-    </script>
-
-    <!-- IE Support -->
-    <script>
-      if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="./assets/vendor/babel-polyfill/polyfill.min.js"><\/script>');
-    </script>
+    <!-- Authentication -->
+    <script src="./assets/firebase/auth.js"></script>
+    <script src="./assets/firebase/dashboard.js"></script>
+    <script src="./assets/firebase/common.js"></script>
   </body>
 </html>
