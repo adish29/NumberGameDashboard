@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Title -->
-    <title>Alternative Dashboard | Front - Admin &amp; Dashboard Template</title>
+    <title>Number Predictor | Store Dashboard</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="./assets/img/favicon.png">
     <!-- Font -->
@@ -67,7 +67,7 @@
                     "type": "css-animation"
                   }'>
                   <div class="avatar avatar-sm avatar-circle">
-                    <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
+                    <img class="avatar-img" src="./assets/img/160x160/img1.jpg" id="profileImage">
                     <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                   </div>
                 </a>
@@ -79,26 +79,26 @@
                         <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
                       </div>
                       <div class="media-body">
-                        <span class="card-title h5">Mark Williams</span>
-                        <span class="card-text">mark@example.com</span>
+                        <span class="card-title h5" id="profileName">Welcome</span>
+                        <span class="card-text" id="profileEmail">welcome@example.com</span>
                       </div>
                     </div>
                   </div>
 
                   <div class="dropdown-divider"></div>
 
-                  <a class="dropdown-item" href="#">
-                    <span class="text-truncate pr-2" title="Profile &amp; account">Profile &amp; account</span>
+                  <a class="dropdown-item" href="profile.html">
+                    <span class="text-truncate pr-2">Profile details</span>
                   </a>
 
-                  <a class="dropdown-item" href="#">
+                  <!-- <a class="dropdown-item" href="#">
                     <span class="text-truncate pr-2" title="Settings">Settings</span>
-                  </a>
+                  </a> -->
 
                   <div class="dropdown-divider"></div>
 
                   <a class="dropdown-item" href="#">
-                    <span class="text-truncate pr-2" title="Sign out">Sign out</span>
+                    <span class="text-truncate pr-2" title="Sign out" onclick="logout()">Sign out</span>
                   </a>
                 </div>
               </div>
@@ -156,7 +156,7 @@
               </li>
 
               <li class="nav-item">
-                <a class="js-nav-tooltip-link nav-link " href="./winners.html" data-placement="left">
+                <a class="js-nav-tooltip-link nav-link " href="./winners.html" title="Winners" data-placement="left">
                   <i class="tio-visible-outlined nav-icon"></i>
                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Winners</span>
                 </a>
@@ -168,16 +168,16 @@
               </li>
 
               <li class="nav-item">
-                <a class="js-nav-tooltip-link nav-link " href="./current-bill.html" title="Layouts" data-placement="left">
+                <a class="js-nav-tooltip-link nav-link " href="./invoice.html" title="View Invoice" data-placement="left">
                   <i class="tio-credit-cards nav-icon"></i>
-                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Current Month</span>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">View Invoices</span>
                 </a>
               </li>
 
               <li class="nav-item ">
-                <a class="js-nav-tooltip-link nav-link " href="./past-bills.html" title="Layouts" data-placement="left">
+                <a class="js-nav-tooltip-link nav-link " href="./all-bills.html" title="All Bills" data-placement="left">
                   <i class="tio-receipt-outlined nav-icon"></i>
-                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Past Bills</span>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Bills</span>
                 </a>
               </li>
 
@@ -191,16 +191,16 @@
               </li>
 
               <li class="nav-item ">
-                <a class="js-nav-tooltip-link nav-link" href="./profile.html"data-placement="left">
+                <a class="js-nav-tooltip-link nav-link" href="./profile.html" title="Profile Details" data-placement="left">
                   <i class="tio-account-circle nav-icon"></i>
                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Profile Details</span>
                 </a>
               </li>
 
               <li class="nav-item ">
-                <a class="js-nav-tooltip-link nav-link" href="./settings.html"data-placement="left">
-                  <i class="tio-settings nav-icon"></i>
-                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Settings</span>
+                <a class="js-nav-tooltip-link nav-link" onclick="logout()" title="Sign Out" data-placement="left">
+                  <i class="tio-turn-off nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Sign Out</span>
                 </a>
               </li>
 
@@ -217,14 +217,14 @@
     <main id="content" role="main" class="main">
       <!-- Page Header Content -->
       <div class="bg-dark">
-        <div class="content container-fluid" style="height: 25rem;">
+        <div class="content container-fluid">
           <div class="page-header page-header-light">
             <div class="row align-items-center">
               <div class="col">
-                <h1 class="page-header-title">Welcome, Markus!</h1>
+                <h1 class="page-header-title" id="welcomeName">Welcome, Markus!</h1>
               </div>
 
-              <div class="col-auto" style="color:white">
+              <div class="col-auto" style="color:white" id="todaysDate">
                   <i class="tio-date-range"></i> Fri, 12th April
               </div>
             </div>
@@ -267,7 +267,7 @@
       <!-- Page Header End -->
 
       <!-- Content -->
-      <div class="content container-fluid">
+      <div class="content container-fluid mt-5">
         <!-- Weekly Sales -->
         <div class="card h-100 mb-3 mb-lg-5">
           <!-- Header -->
@@ -303,72 +303,71 @@
             <!-- End Row -->
 
             <!-- Bar Chart -->
-           <!-- Bar Chart -->
-           <div class="chartjs-custom">
-            <canvas id="updatingData" style="height: 20rem;"
-            data-hs-chartjs-options='{
-              "type": "bar",
-              "data": {
-                "labels": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                "datasets": [{
-                  "data": [],
-                  "backgroundColor": "#377dff",
-                  "hoverBackgroundColor": "#377dff",
-                  "borderColor": "#377dff"
-                },
-                {
-                  "data": [],
-                  "backgroundColor": "#e7eaf3",
-                  "borderColor": "#e7eaf3"
-                }]
-              },
-              "options": {
-                "scales": {
-                  "yAxes": [{
-                    "gridLines": {
-                      "color": "#e7eaf3",
-                      "drawBorder": false,
-                      "zeroLineColor": "#e7eaf3"
-                    },
-                    "ticks": {
-                      "beginAtZero": true,
-                      "fontSize": 12,
-                      "fontColor": "#97a4af",
-                      "fontFamily": "Open Sans, sans-serif",
-                      "padding": 10,
-                      "postfix": ""
-                    }
-                  }],
-                  "xAxes": [{
-                    "gridLines": {
-                      "display": false,
-                      "drawBorder": false
-                    },
-                    "ticks": {
-                      "fontSize": 12,
-                      "fontColor": "#97a4af",
-                      "fontFamily": "Open Sans, sans-serif",
-                      "padding": 5
-                    },
-                    "categoryPercentage": 0.5,
-                    "maxBarThickness": "35"
+            <div class="chartjs-custom">
+              <canvas id="updatingData" style="height: 20rem;"
+              data-hs-chartjs-options='{
+                "type": "bar",
+                "data": {
+                  "labels": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                  "datasets": [{
+                    "data": [],
+                    "backgroundColor": "#377dff",
+                    "hoverBackgroundColor": "#377dff",
+                    "borderColor": "#377dff"
+                  },
+                  {
+                    "data": [],
+                    "backgroundColor": "#e7eaf3",
+                    "borderColor": "#e7eaf3"
                   }]
                 },
-                "cornerRadius": 2,
-                "tooltips": {
-                  "prefix": "",
-                  "hasIndicator": true,
-                  "mode": "index",
-                  "intersect": false
-                },
-                "hover": {
-                  "mode": "nearest",
-                  "intersect": true
+                "options": {
+                  "scales": {
+                    "yAxes": [{
+                      "gridLines": {
+                        "color": "#e7eaf3",
+                        "drawBorder": false,
+                        "zeroLineColor": "#e7eaf3"
+                      },
+                      "ticks": {
+                        "beginAtZero": true,
+                        "fontSize": 12,
+                        "fontColor": "#97a4af",
+                        "fontFamily": "Open Sans, sans-serif",
+                        "padding": 10,
+                        "postfix": ""
+                      }
+                    }],
+                    "xAxes": [{
+                      "gridLines": {
+                        "display": false,
+                        "drawBorder": false
+                      },
+                      "ticks": {
+                        "fontSize": 12,
+                        "fontColor": "#97a4af",
+                        "fontFamily": "Open Sans, sans-serif",
+                        "padding": 5
+                      },
+                      "categoryPercentage": 0.5,
+                      "maxBarThickness": "35"
+                    }]
+                  },
+                  "cornerRadius": 2,
+                  "tooltips": {
+                    "prefix": "",
+                    "hasIndicator": true,
+                    "mode": "index",
+                    "intersect": false
+                  },
+                  "hover": {
+                    "mode": "nearest",
+                    "intersect": true
+                  }
                 }
-              }
-            }'></canvas>
-          </div>
-          <!-- End Bar Chart -->
+              }'></canvas>
+            </div>
+            <!-- End Bar Chart -->
           </div>
           <!-- End Body -->
         </div>
@@ -377,28 +376,28 @@
       <!-- End Content -->
 
       <!-- Footer -->
-        <div class="footer">
-          <div class="row justify-content-between align-items-center">
-            <div class="col">
-              <p class="font-size-sm mb-0">&copy; NumberPredictor. <span class="d-none d-sm-inline-block">2021 TeqmoMedia.</span></p>
-            </div>
-            <div class="col-auto">
-              <div class="d-flex justify-content-end">
-                <!-- List Dot -->
-                <ul class="list-inline list-separator">
-                  <li class="list-inline-item">
-                    <a class="list-separator-link" href="#">FAQ</a>
-                  </li>
+      <div class="footer">
+        <div class="row justify-content-between align-items-center">
+          <div class="col">
+            <p class="font-size-sm mb-0">&copy; NumberPredictor. <span class="d-none d-sm-inline-block">2021 TeqmoMedia.</span></p>
+          </div>
+          <div class="col-auto">
+            <div class="d-flex justify-content-end">
+              <!-- List Dot -->
+              <ul class="list-inline list-separator">
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">FAQ</a>
+                </li>
 
-                  <li class="list-inline-item">
-                    <a class="list-separator-link" href="#">License</a>
-                  </li>
-                </ul>
-                <!-- End List Dot -->
-              </div>
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">License</a>
+                </li>
+              </ul>
+              <!-- End List Dot -->
             </div>
           </div>
         </div>
+      </div>
       <!-- End Footer -->
     </main>
     <!-- ========== END MAIN CONTENT ========== -->
@@ -409,9 +408,20 @@
     
     <!-- JS Front -->
     <script src="./assets/js/theme.min.js"></script>
-    <!-- Authentication -->
+    <script>
+      $(document).on('ready', function () {
+        // INITIALIZATION OF VERTICAL NAVBAR
+        var sidebar = $('.js-navbar-vertical-aside').hsSideNav();
+        // INITIALIZATION OF USER PROFILE DROPDOWN
+        $('.js-hs-unfold-invoker').each(function () {
+            var unfold = new HSUnfold($(this)).init();
+        });
+      })
+    </script>
+
+    <!-- Firebase -->
     <script src="./assets/firebase/auth.js"></script>
-    <script src="./assets/firebase/dashboard.js"></script>
     <script src="./assets/firebase/common.js"></script>
+    <script src="./assets/firebase/dashboard.js"></script>
   </body>
 </html>

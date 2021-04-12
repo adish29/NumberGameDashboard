@@ -46,15 +46,57 @@ function getWeekNumber(date){
  * @param {Number} startOrEnd 0 => StartDate , 1 => End Date
  * @returns {string} if startOrEnd = 0 then Starting date, else Ending date of that week
  */
-function getDateFromWeek(weekNum,startOrEnd){
-    let daysPassed=(weekNum-1)*7;
-    let result = new Date('4/4/2021');
-    if(startOrEnd==1)
-        daysPassed+=6;
-    
-    result.setDate(result.getDate() + daysPassed);
-    // let month = (1 + result.getMonth()).toString().padStart(2, '0');
-    // let day = result.getDate().toString().padStart(2, '0');
-    // let year = result.getFullYear();
+function getDateFromWeek(weekNum, startOrEnd) {
+    let daysPassed = (weekNum - 1) * 7;
+    if(startOrEnd == 1) { 
+        daysPassed+=6 
+    }
+    let result = new Date();
+    result.setDate(START_DATE.getDate() + daysPassed);
     return result.toString().substring(4,15)
+}
+
+function getShiftName(shiftNumber){
+    if(shiftNumber == "1") {return "Morning"}
+    if(shiftNumber == "2") {return "Afternoon"}
+    if(shiftNumber == "3") {return "Evening"}
+    return "No Info Available"
+}
+
+/**
+ * Updates the basic user info whatever is available on the page
+ * Eg. Top left profile icon details
+ */
+function updateBasicInfo(){
+    // const UID = firebase.auth().currentUser.uid;
+    // TODO: Fetch and update user details
+    const userName = 'Mark Zuck'
+    const userEmail = 'mark@fb.com'
+
+    var profileName = document.getElementById('profileName')
+    if(profileName){
+        profileName.innerHTML = userName
+    }
+
+    var profileEmail = document.getElementById('profileEmail')
+    if(profileEmail){
+        profileEmail.innerHTML = userEmail
+    }
+
+    var image = document.getElementById('profileImage')
+    if(image){
+        image.src = './assets/img/160x160/img6.jpg'
+    }
+
+    var todaysDate = document.getElementById('todaysDate')
+    if(todaysDate){
+        var date = new Date()
+        date = date.toString().substring(0,15)
+        todaysDate.innerHTML = `<i class="tio-date-range"></i> ${date}`
+    }
+
+    var welcomeName = document.getElementById('welcomeName')
+    if(welcomeName){
+        welcomeName.innerHTML = `Welcome, ${userName}!`
+    }
 }

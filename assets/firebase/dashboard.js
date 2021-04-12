@@ -1,24 +1,17 @@
-$(document).on('ready', function () {
-    // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
-    var sidebar = $('.js-navbar-vertical-aside').hsSideNav();
-    // INITIALIZATION OF UNFOLD
-    $('.js-hs-unfold-invoker').each(function () {
-        var unfold = new HSUnfold($(this)).init();
-    });
-    // =======================================================
-})
-
+// Call data retrieval functions only after firebase is loaded
 firebase.auth().onAuthStateChanged((user) => {
     if(user){
         updateChart()
         screens()
+        updateBasicInfo()
     }
 })
 
 /**
- * Count Per Day of Current Week, from [Sun, Mon,... , Sat]
- * Current WeekNumber is calculated from current date 
- * @returns {Array} countPerDay Count per day of week, 0th pos:Sunday, ..., 6th pos:Saturday
+ * To return the count of games played in a week
+ * @param {Number} weekNum Number of weeks before the current week
+ * Eg. weekNum = 1 means last week and weekNum = 0 means current week
+ * @returns {Array} Count per day of week, [Sun, Mon,... , Sat]
  */
 async function getCountPerDayOfWeek(weekNum = 0){
     const date = new Date() //Current Date
@@ -31,21 +24,34 @@ async function getCountPerDayOfWeek(weekNum = 0){
     return snapshot.val()
 }
 
+/**
+ * Fetches count data from firebase for current and last week and updates the graphs
+ * Calculates the trend (growth or loss percentage) up till the current day of the week
+ */
 async function updateChart(){
+    // Fetching data for two weeks
     var countThisWeek = await getCountPerDayOfWeek()
     var countLastWeek = await getCountPerDayOfWeek(1)
     
+    // Updating the chart
     var updatingChart = $.HSCore.components.HSChartJS.init($('#updatingData'));
     updatingChart.data.datasets[0].data = countThisWeek
     updatingChart.data.datasets[1].data = countLastWeek
     updatingChart.update();
 
-    const totalThisWeek = countThisWeek.reduce((a, b) => a + b, 0)
-    const totalLastWeek = countLastWeek.reduce((a, b) => a + b, 0)
+    // Calculating the trend compared to the current day of past week 
+    var date = new Date()
+    var day = date.getDay()
+    var totalThisWeek = 0, totalLastWeek = 0
+    for(i=0; i<=day; i++){
+        totalThisWeek += countThisWeek[i]
+        totalLastWeek += countLastWeek[i]
+    }
+
     const increasePercentage = Math.ceil((totalThisWeek - totalLastWeek)*100/totalLastWeek)
 
     const countTrend = document.getElementById("countTrend")
-    if(increasePercentage > 0){
+    if(increasePercentage >= 0){
         countTrend.classList.add("text-success");
         countTrend.classList.remove("text-danger");
         countTrend.innerHTML = `<i class="tio-trending-up"></i> ${increasePercentage}%`
@@ -56,7 +62,10 @@ async function updateChart(){
     }
 }
 
-
+/**
+ * Function to continuoasly monitor the screen status
+ * Displays the number of screens along with their live status
+ */
 function screens(){
     const screenAvailable = 'onclick="unlockScreen(this.id)" class="btn btn-primary btn-pill mx-auto">Unlock Screen</button>'
     const screenBusy = `
@@ -71,54 +80,76 @@ function screens(){
         if(snapshot.exists()){
             document.getElementById('screenContainer').innerHTML = ''
             const data = snapshot.val()
-            console.log(data)
+
             jQuery.each(data, function(screenID, settings) {
-                console.log(screenID, settings)
-                if (!settings.loggedinStatus) {
-                    var activityStatus = screenDisabled
-                } else if(settings.lockUnlock){
-                    var activityStatus = screenAvailable
-                } else {
-                    var activityStatus = screenBusy
-                }
+                if (settings) {
+                    // console.log(screenID, settings)
+                    if (!settings.loggedinStatus) {
+                        var activityStatus = screenDisabled
+                    } else if(settings.lockUnlock){
+                        var activityStatus = screenAvailable
+                    } else {
+                        var activityStatus = screenBusy
+                    }
 
-                if(settings.loggedinStatus){
-                    var logInStatus = '<span class="badge badge-soft-success">Active</span>'
-                } else {
-                    var logInStatus = '<span class="badge badge-soft-danger">Inctive</span>'
-                }
+                    if(settings.loggedinStatus){
+                        var logInStatus = '<span class="badge badge-soft-success">Active</span>'
+                    } else {
+                        var logInStatus = '<span class="badge badge-soft-danger">Inctive</span>'
+                    }
 
-                var card = `
-                <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-                    <div class="card card-hover-shadow h-100">
-                    <div class="card-body">
-                        <h6 class="card-subtitle">Screen ID</h6>
-                        <div class="row align-items-center gx-2 mb-1">
-                            <div class="col-6">
-                                <span class="card-title h2"> TEQMO${screenID}</span>
+                    var card = `
+                    <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
+                        <div class="card card-hover-shadow h-100">
+                        <div class="card-body">
+                            <h6 class="card-subtitle">Screen ID</h6>
+                            <div class="row align-items-center gx-2 mb-1">
+                                <div class="col-6">
+                                    <span class="card-title h2"> TEQMO${screenID}</span>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <button type="button" id="${screenID}" ${activityStatus}
+                                </div>
                             </div>
-                            <div class="col-6 text-center">
-                                <button type="button" id="${screenID}" ${activityStatus}
-                            </div>
+                            <h4>
+                                <span class="text-body mr-1">Status</span>
+                                ${logInStatus}
+                            </h4>
                         </div>
-                        <h4>
-                            <span class="text-body mr-1">Status</span>
-                            ${logInStatus}
-                        </h4>
-                    </div>
-                    </div>
-                </div>`
+                        </div>
+                    </div>`
 
-                document.getElementById('screenContainer').innerHTML += card
+                    document.getElementById('screenContainer').innerHTML += card
+                }
             });
         }
     });
 }
 
+/**
+ * Unlocks the screen with the screen ID
+ * Increments the count value
+ * @param {Number} screenID 
+ */
 function unlockScreen(screenID){
     console.log(screenID);
     const UID = firebase.auth().currentUser.uid;
     firebase.database().ref(`Teqmo/Stores/${UID}/Screens/${screenID}`).update({
         'lockUnlock': SCREEN_UNLOCK
+    });
+
+    const date = new Date() //Current Date
+    const day = date.getDay()
+    const weekNum = getWeekNumber(date)
+    const link = `Teqmo/Stores/${UID}/Payment/Weeks/${weekNum}/counter/${day}`
+
+    // Increment value using Firebase transactions
+    // Creates a new week, counter and day if not already present
+    firebase.database().ref(link).transaction( (value) => {
+        if (value === null) {
+            return 1;
+        } else if (typeof value === 'number') {
+            return value + 1;
+        } 
     });
 }

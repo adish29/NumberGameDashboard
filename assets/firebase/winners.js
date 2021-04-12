@@ -1,51 +1,89 @@
-$(document).on('ready', function () {
-    // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
-    var sidebar = $('.js-navbar-vertical-aside').hsSideNav();
-    // INITIALIZATION OF UNFOLD
-    $('.js-hs-unfold-invoker').each(function () {
-        var unfold = new HSUnfold($(this)).init();
-    });
-    // =======================================================
-})
-
+// Call data retrieval functions only after firebase is loaded
 firebase.auth().onAuthStateChanged((user) => {
     if(user){
         showWinners()
+        updateBasicInfo()
     }
 })
 
 /**
- * Gives all the sales related data for All the weeks present in Database
- * @returns {Array of JSON Objects} Each JSON contains data for each week  
+ * Fetches all the winners data for this Store present in Database
+ * Passes the array to the update function which loads the data on table and initialises it
  */
-function showWinners(){
+async function showWinners(){
     const UID = firebase.auth().currentUser.uid;
     // const UID = 'OHatm0qKa2Rf3DFnAj1Vq64Fcn62'
-    firebase.database().ref(`Teqmo/Winners/${UID}`).on('value',(snapshot)=>{
-        if(snapshot.exists()){
-            document.getElementById('tableBody').innerHTML = ''
-            snapshot.forEach(digit => {
-                digit.forEach(date=>{
-                    date.forEach(shift=>{
-                        let windate = date.key.split("-").reverse().join("-")
-                        let Shift = shift.key.substring(1,shift.key.length)
-                        let digits = digit.key[0]
-                        let actualNumber = shift.val().ActualNumber
-                        let permutations = shift.val().Permutations
-                        let count = permutations.split(',').length
-                    
-                        var row = `<tr>
-                        <td>${windate}</td>
-                        <td>${Shift}</td>
-                        <td>${digits}</td>
-                        <td>${actualNumber}</td>
-                        <td>${permutations}</td>
-                        <td>${count}</td>
-                        </tr>`
-                        document.getElementById('tableBody').innerHTML += row
-                    });
-                });
-            });
-        }
+
+    const snapshot = await firebase.database().ref(`Teqmo/Winners/${UID}`).once('value')
+    const data = snapshot.val()
+    var dataSet = []
+    
+    jQuery.each(data, function(date, allShifts) {
+        // console.log(date, allShifts)
+        jQuery.each(allShifts, function(shift, details) {
+            // console.log(shift, details)
+            if(details){
+                // Obtain the dete from key and convert full date 
+                // `Wed Apr 07 2021 05:30:00 GMT+0530 (India Standard Time)`
+                // to `Wed Apr 07 2021`
+                let winDate = new Date(date)
+                winDate = winDate.toString().substring(0,15).replace(' ', ', ')
+
+                let shiftName = getShiftName(shift)
+                let actualNumber = details.winNum
+                let predictions = details.predictions.replace(/,/g, ', ')
+                let game = `TEQMO` + actualNumber.length //TEQMO3 or TEQMO4
+                let count = predictions.split(',').length
+    
+                let row = [winDate, shiftName, game, actualNumber, predictions, count]
+                dataSet.push(row)
+            }
+        })
     })
+
+    updateDataTable(dataSet)
+}
+
+// INITIALIZATION OF DATATABLES
+function updateDataTable(dataSet){
+    // Sample Data to be received (Number of items in each row should match the columns)
+    // var dataSet = [
+    //    ["Mon Apr 10 2021", "Morning", "TEQMO3", "123", "123, 321", "5"],
+    //    ["Tue Apr 11 2021", "Afternoon", "TEQMO4", "123", "123, 321", "5"],
+    // ]
+
+    var datatable = $.HSCore.components.HSDatatables.init($('#datatable'), {
+      data: dataSet,
+      columns: [
+          { title: "Date" },
+          { title: "Shift" },
+          { title: "Game" },
+          { title: "Actual Number" },
+          { title: "Predictions" },
+          { title: "Winners Count" }
+      ],
+      language: {
+        zeroRecords: '<div class="text-center p-4">' +
+            '<img class="mb-3" src="./assets/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">' +
+            '<p class="mb-0">No data to show</p>' +
+            '</div>'
+      }
+    });
+
+    // Initialise search on table
+    $('#datatableSearch').on('mouseup', function (e) {
+      var $input = $(this),
+        oldValue = $input.val();
+
+      if (oldValue == "") return;
+
+      setTimeout(function(){
+        var newValue = $input.val();
+
+        if (newValue == ""){
+          // Gotcha
+          datatable.search('').draw();
+        }
+      }, 1);
+    });
 }

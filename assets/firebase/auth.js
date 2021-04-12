@@ -1,16 +1,17 @@
+/** 
+ * Shows dashboard pages only if a user is logged in
+ * Redirects to auth pages if not
+*/
 firebase.auth().onAuthStateChanged((user) => {
     const authPages = ['login', 'signup', 'forgot-password']
     var currentPage = window.location.pathname.split('/')
     var currentPage = currentPage[currentPage.length-1].split('.')[0]
 
     if (user && authPages.includes(currentPage)) {
-      // see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      var uid = user.uid;
       window.location.href = '../index.html'
     } 
     else if(!user && !authPages.includes(currentPage)) {
-      // User is NOT signed in
+      // User is NOT signed in, redirecting to auth page
       window.location.href = './auth/login.html'
     }
 });  
@@ -18,10 +19,12 @@ firebase.auth().onAuthStateChanged((user) => {
 function login(){
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
-    console.log(email, password)
+
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then((user) => {
         // Signed in
+        // TODO: Check if logged in user has the permission to view Store pages
+        // If not log out and display appropriate message.
     })
     .catch((error) => {
         var errorCode = error.code;
@@ -32,6 +35,11 @@ function login(){
           text: `${errorCode} ${errorMessage}`,
         })
     });
+
+    // Update the button description after click
+    const button = document.getElementById('loginButton')
+    button.disabled = true
+    button.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
 }
 
 function logout(){

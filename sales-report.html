@@ -67,7 +67,7 @@
                     "type": "css-animation"
                   }'>
                   <div class="avatar avatar-sm avatar-circle">
-                    <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
+                    <img class="avatar-img" src="./assets/img/160x160/img1.jpg" id="profileImage">
                     <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                   </div>
                 </a>
@@ -79,26 +79,26 @@
                         <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
                       </div>
                       <div class="media-body">
-                        <span class="card-title h5">Mark Williams</span>
-                        <span class="card-text">mark@example.com</span>
+                        <span class="card-title h5" id="profileName">Welcome</span>
+                        <span class="card-text" id="profileEmail">welcome@example.com</span>
                       </div>
                     </div>
                   </div>
 
                   <div class="dropdown-divider"></div>
 
-                  <a class="dropdown-item" href="#">
-                    <span class="text-truncate pr-2" title="Profile &amp; account">Profile &amp; account</span>
+                  <a class="dropdown-item" href="profile.html">
+                    <span class="text-truncate pr-2">Profile details</span>
                   </a>
 
-                  <a class="dropdown-item" href="#">
+                  <!-- <a class="dropdown-item" href="#">
                     <span class="text-truncate pr-2" title="Settings">Settings</span>
-                  </a>
+                  </a> -->
 
                   <div class="dropdown-divider"></div>
 
                   <a class="dropdown-item" href="#">
-                    <span class="text-truncate pr-2" title="Sign out">Sign out</span>
+                    <span class="text-truncate pr-2" title="Sign out" onclick="logout()">Sign out</span>
                   </a>
                 </div>
               </div>
@@ -156,7 +156,7 @@
               </li>
 
               <li class="nav-item">
-                <a class="js-nav-tooltip-link nav-link " href="./winners.html" data-placement="left">
+                <a class="js-nav-tooltip-link nav-link " href="./winners.html" title="Winners" data-placement="left">
                   <i class="tio-visible-outlined nav-icon"></i>
                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Winners</span>
                 </a>
@@ -168,16 +168,16 @@
               </li>
 
               <li class="nav-item">
-                <a class="js-nav-tooltip-link nav-link " href="./current-bill.html" title="Layouts" data-placement="left">
+                <a class="js-nav-tooltip-link nav-link " href="./invoice.html" title="View Invoice" data-placement="left">
                   <i class="tio-credit-cards nav-icon"></i>
-                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Current Month</span>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">View Invoices</span>
                 </a>
               </li>
 
               <li class="nav-item ">
-                <a class="js-nav-tooltip-link nav-link " href="./past-bills.html" title="Layouts" data-placement="left">
+                <a class="js-nav-tooltip-link nav-link " href="./all-bills.html" title="All Bills" data-placement="left">
                   <i class="tio-receipt-outlined nav-icon"></i>
-                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Past Bills</span>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">All Bills</span>
                 </a>
               </li>
 
@@ -191,16 +191,16 @@
               </li>
 
               <li class="nav-item ">
-                <a class="js-nav-tooltip-link nav-link" href="./profile.html"data-placement="left">
+                <a class="js-nav-tooltip-link nav-link" href="./profile.html" title="Profile Details" data-placement="left">
                   <i class="tio-account-circle nav-icon"></i>
                   <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Profile Details</span>
                 </a>
               </li>
 
               <li class="nav-item ">
-                <a class="js-nav-tooltip-link nav-link" href="./settings.html"data-placement="left">
-                  <i class="tio-settings nav-icon"></i>
-                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Settings</span>
+                <a class="js-nav-tooltip-link nav-link" onclick="logout()" title="Sign Out" data-placement="left" style="cursor: pointer;">
+                  <i class="tio-turn-off nav-icon"></i>
+                  <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Sign Out</span>
                 </a>
               </li>
 
@@ -222,15 +222,6 @@
               <div class="col">
                 <h1 class="page-header-title">Sales Report</h1>
               </div>
-
-              <div class="col-auto">
-                <!-- Daterangepicker -->
-                <button id="js-daterangepicker-predefined" class="btn btn-sm btn-ghost-light dropdown-toggle">
-                  <i class="tio-date-range"></i>
-                  <span class="js-daterangepicker-predefined-preview ml-1"></span>
-                </button>
-                <!-- End Daterangepicker -->
-              </div>
             </div>
             <!-- End Row -->
           </div>
@@ -247,70 +238,13 @@
             <div class="row justify-content-between align-items-center flex-grow-1">
               <div class="col-12 col-md">
                 <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="card-header-title">Weekly Report</h5>
-
-                  <!-- Datatable Info -->
-                  <div id="datatableCounterInfo" style="display: none;">
-                    <div class="d-flex align-items-center">
-                      <span class="font-size-sm mr-3">
-                        <span id="datatableCounter">0</span>
-                        Selected
-                      </span>
-                      <a class="btn btn-sm btn-outline-danger" href="javascript:;">
-                        <i class="tio-delete-outlined"></i> Delete
-                      </a>
-                    </div>
-                  </div>
-                  <!-- End Datatable Info -->
+                  <h3 class="card-header-title">Weekly Report 📃</h3>
                 </div>
               </div>
 
               <div class="col-auto">
                 <!-- Filter -->
                 <div class="row align-items-sm-center">
-                  <div class="col-sm-auto">
-                    <div class="d-flex align-items-center mr-2">
-                      <span class="text-secondary mr-2">Start Date:</span>
-
-                      <!-- Select -->
-                      <select class="js-select2-custom js-datatable-filter custom-select-sm" size="1" style="opacity: 0;"
-                              data-target-column-index="2"
-                              data-hs-select2-options='{
-                                "minimumResultsForSearch": "Infinity",
-                                "customClass": "custom-select custom-select-sm custom-select-borderless",
-                                "dropdownAutoWidth": true,
-                                "width": true
-                              }'>
-                        <option value="">All</option>
-                        <option value="successful">Successful</option>
-                        <option value="overdue">Overdue</option>
-                        <option value="pending">Pending</option>
-                      </select>
-                      <!-- End Select -->
-                    </div>
-                  </div>
-
-                  <div class="col-sm-auto">
-                    <div class="d-flex align-items-center mr-2">
-                      <span class="text-secondary mr-2">End Date:</span>
-
-                      <!-- Select -->
-                      <select class="js-select2-custom js-datatable-filter custom-select-sm" size="1" style="opacity: 0;"
-                              data-target-column-index="5"
-                              data-hs-select2-options='{
-                                "minimumResultsForSearch": "Infinity",
-                                "customClass": "custom-select custom-select-sm custom-select-borderless",
-                                "dropdownAutoWidth": true,
-                                "width": true
-                              }'>
-                        <option value="">All</option>
-                        <option value="1 year ago">1 year ago</option>
-                        <option value="6 months ago">6 months ago</option>
-                      </select>
-                      <!-- End Select -->
-                    </div>
-                  </div>
-
                   <div class="col-md">
                     <form>
                       <!-- Search -->
@@ -333,11 +267,11 @@
           <!-- End Header -->
 
           <!-- Table -->
-          <div class="table-responsive datatable-custom">
-            <table id="datatable" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+          <div class="table-responsive datatable-custom text-center">
+            <table id="datatable" class="table table-hover table-borderless table-nowrap table-align-middle card-table"
                    data-hs-datatables-options='{
                      "columnDefs": [{
-                        "targets": [0, 1],
+                        "targets": [],
                         "orderable": false
                       }],
                      "order": [],
@@ -346,12 +280,12 @@
                      },
                      "search": "#datatableSearch",
                      "entries": "#datatableEntries",
-                     "pageLength": 10,
+                     "pageLength": 8,
                      "isResponsive": true,
                      "isShowPaging": false,
                      "pagination": "datatablePagination"
                    }'>
-              <thead class="thead-light">
+              <thead class="thead-dark">
                 <tr>
                   <th>Start Date</th>
                   <th>End Date</th>
@@ -366,8 +300,8 @@
               <tbody id="tableBody">
                 <tr>
                   <td> </td>
-                  <td> </td>
-                  <td>Please Wait</td>
+                  <td>Please</td>
+                  <td>Wait</td>
                   <td>Loading</td>
                   <td>Data</td>
                   <td></td>
@@ -424,58 +358,57 @@
       <!-- End Content -->
 
       <!-- Footer -->
-        <div class="footer">
-          <div class="row justify-content-between align-items-center">
-            <div class="col">
-              <p class="font-size-sm mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2020 Htmlstream.</span></p>
-            </div>
-            <div class="col-auto">
-              <div class="d-flex justify-content-end">
-                <!-- List Dot -->
-                <ul class="list-inline list-separator">
-                  <li class="list-inline-item">
-                    <a class="list-separator-link" href="#">FAQ</a>
-                  </li>
+      <div class="footer">
+        <div class="row justify-content-between align-items-center">
+          <div class="col">
+            <p class="font-size-sm mb-0">&copy; Front. <span class="d-none d-sm-inline-block">2020 Htmlstream.</span></p>
+          </div>
+          <div class="col-auto">
+            <div class="d-flex justify-content-end">
+              <!-- List Dot -->
+              <ul class="list-inline list-separator">
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">FAQ</a>
+                </li>
 
-                  <li class="list-inline-item">
-                    <a class="list-separator-link" href="#">License</a>
-                  </li>
+                <li class="list-inline-item">
+                  <a class="list-separator-link" href="#">License</a>
+                </li>
 
-                  <li class="list-inline-item">
-                    <!-- Keyboard Shortcuts Toggle -->
-                    <div class="hs-unfold">
-                      <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;"
-                         data-hs-unfold-options='{
-                              "target": "#keyboardShortcutsSidebar",
-                              "type": "css-animation",
-                              "animationIn": "fadeInRight",
-                              "animationOut": "fadeOutRight",
-                              "hasOverlay": true,
-                              "smartPositionOff": true
-                             }'>
-                        <i class="tio-command-key"></i>
-                      </a>
-                    </div>
-                    <!-- End Keyboard Shortcuts Toggle -->
-                  </li>
-                </ul>
-                <!-- End List Dot -->
-              </div>
+                <li class="list-inline-item">
+                  <!-- Keyboard Shortcuts Toggle -->
+                  <div class="hs-unfold">
+                    <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;"
+                        data-hs-unfold-options='{
+                            "target": "#keyboardShortcutsSidebar",
+                            "type": "css-animation",
+                            "animationIn": "fadeInRight",
+                            "animationOut": "fadeOutRight",
+                            "hasOverlay": true,
+                            "smartPositionOff": true
+                            }'>
+                      <i class="tio-command-key"></i>
+                    </a>
+                  </div>
+                  <!-- End Keyboard Shortcuts Toggle -->
+                </li>
+              </ul>
+              <!-- End List Dot -->
             </div>
           </div>
         </div>
+      </div>
       <!-- End Footer -->
     </main>
     <!-- ========== END MAIN CONTENT ========== -->
 
     <!-- JS Implementing Plugins -->
     <script src="./assets/js/vendor.min.js"></script>
-    <script src="./assets/vendor/chart.js/dist/Chart.min.js"></script>
-    <script src="./assets/vendor/chart.js.extensions/chartjs-extensions.js"></script>
-    <script src="./assets/vendor/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script>
     
     <!-- JS Front -->
     <script src="./assets/js/theme.min.js"></script>
+
+    <!-- Firebase -->
     <script src="./assets/firebase/auth.js"></script>
     <script src="./assets/firebase/common.js"></script>
     <script src="./assets/firebase/sales-report.js"></script>
@@ -483,51 +416,10 @@
     <!-- JS Plugins Init. -->
     <script>
       $(document).on('ready', function () {
-        // ONLY DEV
-        // =======================================================
-        
-          if (window.localStorage.getItem('hs-builder-popover') === null) {
-            $('#builderPopover').popover('show')
-              .on('shown.bs.popover', function () {
-                $('.popover').last().addClass('popover-dark')
-              });
-
-            $(document).on('click', '#closeBuilderPopover' , function() {
-              window.localStorage.setItem('hs-builder-popover', true);
-              $('#builderPopover').popover('dispose');
-            });
-          } else {
-            $('#builderPopover').on('show.bs.popover', function () {
-              return false
-            });
-          }
-        
-        // END ONLY DEV
-        // =======================================================
-
-
-        // BUILDER TOGGLE INVOKER
-        // =======================================================
-        $('.js-navbar-vertical-aside-toggle-invoker').click(function () {
-          $('.js-navbar-vertical-aside-toggle-invoker i').tooltip('hide');
-        });
-
-        
-          // INITIALIZATION OF MEGA MENU
-          // =======================================================
-          var megaMenu = new HSMegaMenu($('.js-mega-menu'), {
-            desktop: {
-              position: 'left'
-            }
-          }).init();
-        
-
-        
         // INITIALIZATION OF NAVBAR VERTICAL NAVIGATION
         // =======================================================
         var sidebar = $('.js-navbar-vertical-aside').hsSideNav();
 
-        
         // INITIALIZATION OF TOOLTIP IN NAVBAR VERTICAL MENU
         // =======================================================
         $('.js-nav-tooltip-link').tooltip({ boundary: 'window' })
@@ -538,210 +430,10 @@
           }
         });
 
-        
         // INITIALIZATION OF UNFOLD
         // =======================================================
         $('.js-hs-unfold-invoker').each(function () {
           var unfold = new HSUnfold($(this)).init();
-        });
-
-        
-        // INITIALIZATION OF FORM SEARCH
-        // =======================================================
-        $('.js-form-search').each(function () {
-          new HSFormSearch($(this)).init()
-        });
-
-        
-        // INITIALIZATION OF SELECT2
-        // =======================================================
-        $('.js-select2-custom').each(function () {
-          var select2 = $.HSCore.components.HSSelect2.init($(this));
-        });
-
-        
-        // INITIALIZATION OF CHARTJS
-        // =======================================================
-        Chart.plugins.unregister(ChartDataLabels);
-
-        $('.js-chart').each(function () {
-          $.HSCore.components.HSChartJS.init($(this));
-        });
-
-        var updatingChart = $.HSCore.components.HSChartJS.init($('#updatingData'));
-
-        // CALL WHEN TAB IS CLICKED
-        // =======================================================
-        $('[data-toggle="chart-bar"]').click(function(e) {
-          let keyDataset = $(e.currentTarget).attr('data-datasets')
-
-         if (keyDataset === 'lastWeek') {
-           updatingChart.data.labels = ["Apr 22", "Apr 23", "Apr 24", "Apr 25", "Apr 26", "Apr 27", "Apr 28", "Apr 29", "Apr 30", "Apr 31"];
-           updatingChart.data.datasets = [
-             {
-               "data": [120, 250, 300, 200, 300, 290, 350, 100, 125, 320],
-               "backgroundColor": "#377dff",
-               "hoverBackgroundColor": "#377dff",
-               "borderColor": "#377dff"
-             },
-             {
-               "data": [250, 130, 322, 144, 129, 300, 260, 120, 260, 245, 110],
-               "backgroundColor": "#e7eaf3",
-               "borderColor": "#e7eaf3"
-             }
-           ];
-           updatingChart.update();
-         } else {
-           updatingChart.data.labels = ["May 1", "May 2", "May 3", "May 4", "May 5", "May 6", "May 7", "May 8", "May 9", "May 10"];
-           updatingChart.data.datasets = [
-             {
-               "data": [200, 300, 290, 350, 150, 350, 300, 100, 125, 220],
-               "backgroundColor": "#377dff",
-               "hoverBackgroundColor": "#377dff",
-               "borderColor": "#377dff"
-             },
-             {
-               "data": [150, 230, 382, 204, 169, 290, 300, 100, 300, 225, 120],
-               "backgroundColor": "#e7eaf3",
-               "borderColor": "#e7eaf3"
-             }
-           ]
-           updatingChart.update();
-         }
-        })
-
-        
-        // INITIALIZATION OF BUBBLE CHARTJS WITH DATALABELS PLUGIN
-        // =======================================================
-        $('.js-chart-datalabels').each(function () {
-          $.HSCore.components.HSChartJS.init($(this), {
-            plugins: [ChartDataLabels],
-            options: {
-              plugins: {
-                datalabels: {
-                  anchor: function(context) {
-                    var value = context.dataset.data[context.dataIndex];
-                    return value.r < 20 ? 'end' : 'center';
-                  },
-                  align: function(context) {
-                    var value = context.dataset.data[context.dataIndex];
-                    return value.r < 20 ? 'end' : 'center';
-                  },
-                  color: function(context) {
-                    var value = context.dataset.data[context.dataIndex];
-                    return value.r < 20 ? context.dataset.backgroundColor : context.dataset.color;
-                  },
-                  font: function(context) {
-                    var value = context.dataset.data[context.dataIndex],
-                      fontSize = 25;
-
-                    if (value.r > 50) {
-                      fontSize = 35;
-                    }
-
-                    if (value.r > 70) {
-                      fontSize = 55;
-                    }
-
-                    return {
-                      weight: 'lighter',
-                      size: fontSize
-                    };
-                  },
-                  offset: 2,
-                  padding: 0
-                }
-              }
-            },
-          });
-        });
-
-        
-        // INITIALIZATION OF DATERANGEPICKER
-        // =======================================================
-        $('.js-daterangepicker').daterangepicker();
-
-        $('.js-daterangepicker-times').daterangepicker({
-          timePicker: true,
-          startDate: moment().startOf('hour'),
-          endDate: moment().startOf('hour').add(32, 'hour'),
-          locale: {
-            format: 'M/DD hh:mm A'
-          }
-        });
-
-        var start = moment();
-        var end = moment();
-
-        function cb(start, end) {
-          $('#js-daterangepicker-predefined .js-daterangepicker-predefined-preview').html(start.format('MMM D') + ' - ' + end.format('MMM D, YYYY'));
-        }
-
-        $('#js-daterangepicker-predefined').daterangepicker({
-          startDate: start,
-          endDate: end,
-          ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-          }
-        }, cb);
-
-        cb(start, end);
-
-        
-        // INITIALIZATION OF DATATABLES
-        // =======================================================
-        var datatable = $.HSCore.components.HSDatatables.init($('#datatable'), {
-          select: {
-            style: 'multi',
-            selector: 'td:first-child input[type="checkbox"]',
-            classMap: {
-              checkAll: '#datatableCheckAll',
-              counter: '#datatableCounter',
-              counterInfo: '#datatableCounterInfo'
-            }
-          },
-          language: {
-            zeroRecords: '<div class="text-center p-4">' +
-                '<img class="mb-3" src="./assets/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">' +
-                '<p class="mb-0">No data to show</p>' +
-                '</div>'
-          }
-        });
-
-        $('.js-datatable-filter').on('change', function() {
-          var $this = $(this),
-            elVal = $this.val(),
-            targetColumnIndex = $this.data('target-column-index');
-
-          datatable.column(targetColumnIndex).search(elVal).draw();
-        });
-
-        $('#datatableSearch').on('mouseup', function (e) {
-          var $input = $(this),
-            oldValue = $input.val();
-
-          if (oldValue == "") return;
-
-          setTimeout(function(){
-            var newValue = $input.val();
-
-            if (newValue == ""){
-              // Gotcha
-              datatable.search('').draw();
-            }
-          }, 1);
-        });
-
-        
-        // INITIALIZATION OF CLIPBOARD
-        // =======================================================
-        $('.js-clipboard').each(function() {
-          var clipboard = $.HSCore.components.HSClipboard.init(this);
         });
       });
     </script>
