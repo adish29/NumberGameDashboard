@@ -15,6 +15,31 @@
     <link rel="stylesheet" href="./assets/vendor/icon-set/style.css">
     <!-- CSS Front Template -->
     <link rel="stylesheet" href="./assets/css/theme.min.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-storage.js"></script>
+
+
+    <!--Your web app's Firebase configuration -->
+    <script>
+     var firebaseConfig = {
+    apiKey: "AIzaSyBnAnjOnrX9w8BRqaPNSiUrj3RvnQ_ZvsA",
+    authDomain: "number-game-446a8.firebaseapp.com",
+    projectId: "number-game-446a8",
+    storageBucket: "number-game-446a8.appspot.com",
+    databaseURL: "https://number-game-446a8-default-rtdb.firebaseio.com/",
+    messagingSenderId: "1073849575497",
+    appId: "1:1073849575497:web:29ea428cf46d991e8f3798"
+  };
+  var secondaryApp = firebase.initializeApp(firebaseConfig, "Secondary");
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+   </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </head>
 
   <body class="footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl">
@@ -48,7 +73,7 @@
                     "type": "css-animation"
                   }'>
                   <div class="avatar avatar-sm avatar-circle">
-                    <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
+                    <img class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
                     <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                   </div>
                 </a>
@@ -60,8 +85,8 @@
                         <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
                       </div>
                       <div class="media-body">
-                        <span class="card-title h5">Mark Williams</span>
-                        <span class="card-text">mark@example.com</span>
+                        <span class="card-title h5" id="profileName"></span>
+                        <span class="card-text" id="profileEmail"></span>
                       </div>
                     </div>
                   </div>
@@ -214,10 +239,10 @@
                               "targetAttr": "src",
                               "allowTypes": [".png", ".jpeg", ".jpg"]
                            }'>
-                    <label class="custom-file-btn-label btn btn-sm btn-white" for="profileCoverUplaoder">
+                    <!-- <label class="custom-file-btn-label btn btn-sm btn-white" for="profileCoverUplaoder">
                       <i class="tio-add-photo"></i>
                       <span class="d-none d-sm-inline-block ml-1">Update your header</span>
-                    </label>
+                    </label> -->
                   </div>
                 </div>
                 <!-- End Custom File Cover -->
@@ -229,8 +254,9 @@
             <div class="text-center mb-5">
               <!-- Avatar -->
               <label class="avatar avatar-xxl avatar-circle avatar-border-lg avatar-uploader profile-cover-avatar" for="avatarUploader">
-                <img id="avatarImg" class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
+                <img id="avatarImg" class="avatar-img" src="./assets/img/160x160/img1.jpg" alt="Image Description">
 
+                <!-- Image input from user -->
                 <input type="file" class="js-file-attach avatar-uploader-input" id="avatarUploader"
                        data-hs-file-attach-options='{
                           "textTarget": "#avatarImg",
@@ -245,24 +271,26 @@
               </label>
               <!-- End Avatar -->
 
-              <h1 class="page-header-title">Mark Williams <i class="tio-verified tio-lg text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></h1>
+              <h1 class="page-header-title" id="headerName">
+                <i class="tio-verified tio-lg text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i>
+              </h1>
 
               <!-- List -->
               <ul class="list-inline list-inline-m-1">
                 <li class="list-inline-item">
-                  <i class="tio-city mr-1"></i>
-                  <span>Pixeel Ltd.</span>
+                  <i class="tio-shop mr-1"></i>
+                  <span id="storeHeader"></span>
                 </li>
 
                 <li class="list-inline-item">
                   <i class="tio-poi-outlined mr-1"></i>
-                  <a href="#">London,</a>
-                  <a href="#">UK</a>
+                  <a href="#" id="stateHeader"></a>
+                  <a href="#">,United States</a>
                 </li>
 
                 <li class="list-inline-item">
                   <i class="tio-date-range mr-1"></i>
-                  <span>Joined March 2013</span>
+                  <span>Joined April 2021</span>
                 </li>
               </ul>
               <!-- End List -->
@@ -292,7 +320,7 @@
                 <li class="nav-item">
                   <a class="nav-link active disabled" href="#">Profile</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link disabled" href="#">Teams</a>
                 </li>
                 <li class="nav-item">
@@ -300,7 +328,7 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link disabled" href="#">Connections</a>
-                </li>
+                </li> -->
 
                 <li class="nav-item ml-auto">
                   <a class="btn btn-sm btn-white mr-2" href="account-settings.html">
@@ -372,7 +400,7 @@
                   <div class="card-header">
                     <h2 class="card-header-title h5">Profile</h2>
 
-                    <a class="btn btn-sm btn-white" href="account-settings.html">Edit</a>
+                    <!-- <a class="btn btn-sm btn-white" href="account-settings.html">Edit</a> -->
                   </div>
                   <!-- End Header -->
 
@@ -383,33 +411,33 @@
                         <small class="card-subtitle">About</small>
                       </li>
 
-                      <li>
+                      <li id="name">
                         <i class="tio-user-outlined nav-icon"></i>
-                        Mark Williams
+                        
                       </li>
-                      <li>
+                      <li id="company">
                         <i class="tio-briefcase-outlined nav-icon"></i>
-                        No department title
+                        
                       </li>
-                      <li>
-                        <i class="tio-city nav-icon"></i>
-                        Pixeel Ltd.
+                      <li id="store">
+                        <i class="tio-shop-outlined nav-icon"></i>
+                      
                       </li>
 
                       <li class="pt-2 pb-0">
                         <small class="card-subtitle">Contacts</small>
                       </li>
 
-                      <li>
+                      <li id="email">
                         <i class="tio-online nav-icon"></i>
-                        mark@example.com
+                        
                       </li>
-                      <li>
+                      <li id="contact">
                         <i class="tio-android-phone-vs nav-icon"></i>
-                        +1  (555) 752-01-10
+                       
                       </li>
 
-                      <li class="pt-2 pb-0">
+                      <!-- <li class="pt-2 pb-0">
                         <small class="card-subtitle">Teams</small>
                       </li>
 
@@ -420,12 +448,14 @@
                       <li class="font-size-sm text-body">
                         <i class="tio-briefcase-outlined nav-icon"></i>
                         You are not working on any projects
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                   <!-- End Body -->
                 </div>
                 <!-- End Card -->
+
+
 
                 <!-- Card -->
                 <div class="card card-lg mb-3 mb-lg-5">
@@ -436,11 +466,11 @@
                     </div>
 
                     <div class="mb-3">
-                      <h3>2-step verification</h3>
-                      <p>Protect your account now and enable 2-step verification in the settings.</p>
+                      <h3>Invest More!!</h3>
+                      <p>Request Teqmo Admin to add addtional screens.</p>
                     </div>
 
-                    <a class="btn btn-primary" href="account-settings.html#twoStepVerificationSection">Enable Now</a>
+                    <a class="btn btn-primary">Request Now</a>
                   </div>
                   <!-- End Body -->
                 </div>
@@ -491,20 +521,20 @@
                   <div class="card-body card-body-height card-body-centered">
                     <img class="avatar avatar-xxl mb-3" src="./assets/svg/illustrations/yelling.svg" alt="Image Description">
                     <p class="card-text">No data to show</p>
-                    <a class="btn btn-sm btn-white" href="#">Start your Activity</a>
+                   <!--  <a class="btn btn-sm btn-white" href="#">Start your Activity</a> -->
                   </div>
                   <!-- End Body -->
                 </div>
                 <!-- End Card -->
 
                 <!-- Card -->
-                <div class="card mb-3 mb-lg-5">
+                <!-- <div class="card mb-3 mb-lg-5"> -->
                   <!-- Header -->
-                  <div class="card-header">
-                    <h2 class="card-header-title h5">Projects</h2>
+                 <!--  <div class="card-header">
+                    <h2 class="card-header-title h5">Projects</h2> -->
 
                     <!-- Unfold -->
-                    <div class="hs-unfold">
+                    <!-- <div class="hs-unfold">
                       <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-ghost-secondary rounded-circle" href="javascript:;"
                          data-hs-unfold-options='{
                            "target": "#projectReportDropdown",
@@ -531,19 +561,19 @@
                           <i class="tio-chat-outlined dropdown-item-icon"></i> Report
                         </a>
                       </div>
-                    </div>
+                    </div> -->
                     <!-- End Unfold -->
-                  </div>
+                 <!--  </div> -->
                   <!-- End Header -->
 
                   <!-- Body -->
-                  <div class="card-body card-body-height card-body-centered">
+                 <!--  <div class="card-body card-body-height card-body-centered">
                     <img class="avatar avatar-xxl mb-3" src="./assets/svg/illustrations/yelling.svg" alt="Image Description">
                     <p class="card-text">No data to show</p>
                     <a class="btn btn-sm btn-white" href="projects.html">Start your Projects</a>
-                  </div>
+                  </div> -->
                   <!-- End Body -->
-                </div>
+                <!-- </div> -->
                 <!-- End Card -->
               </div>
             </div>
@@ -606,6 +636,8 @@
     
     <!-- JS Front -->
     <script src="./assets/js/theme.min.js"></script>
+    <!-- <script src="./assets/firebase/common.js"></script> -->
+    <script src="./assets/firebase/profile.js"></script>
 
     <!-- JS Plugins Init. -->
     <script>
