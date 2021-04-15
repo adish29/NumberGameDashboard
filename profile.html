@@ -335,9 +335,9 @@
                     <i class="tio-edit mr-1"></i> Edit profile
                   </a>
 
-                  <a class="btn btn-icon btn-sm btn-white mr-2" href="#">
+                  <!-- <a class="btn btn-icon btn-sm btn-white mr-2" href="#">
                     <i class="tio-format-points mr-1"></i>
-                  </a>
+                  </a> -->
 
                   <!-- Unfold -->
                   <div class="hs-unfold hs-nav-scroller-unfold">
@@ -355,9 +355,9 @@
                       <a class="dropdown-item" href="#">
                         <i class="tio-share dropdown-item-icon"></i> Share profile
                       </a>
-                      <a class="dropdown-item" href="#">
+                    <!--   <a class="dropdown-item" href="#">
                         <i class="tio-blocked dropdown-item-icon"></i> Block page and profile
-                      </a>
+                      </a> -->
                       <a class="dropdown-item" href="#">
                         <i class="tio-info-outined dropdown-item-icon"></i> Suggest edits
                       </a>
@@ -380,25 +380,27 @@
             <div class="row">
               <div class="col-lg-4">
                 <!-- Card -->
-                <div class="card card-body mb-3 mb-lg-5">
+                <!-- <div class="card card-body mb-3 mb-lg-5">
                   <h5>Complete your profile</h5>
-
+ -->
                   <!-- Progress -->
-                  <div class="d-flex justify-content-between align-items-center">
+                 <!--  <div class="d-flex justify-content-between align-items-center">
                     <div class="progress flex-grow-1">
                       <div class="progress-bar bg-primary" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <span class="ml-4">15%</span>
-                  </div>
+                  </div> -->
                   <!-- End Progress -->
-                </div>
-                <!-- End Card -->
+                <!-- </div>
+ -->                <!-- End Card -->
 
                 <!-- Card -->
-                <div class="card mb-3 mb-lg-5">
+                <div class="card-body" style="width: 850px;">
                   <!-- Header -->
                   <div class="card-header">
-                    <h2 class="card-header-title h5">Profile</h2>
+                    <h2 class="card-header-title h5">
+                    <!-- STORE ADMIN'S PROFILE DETAILS -->
+                  </h2>
 
                     <!-- <a class="btn btn-sm btn-white" href="account-settings.html">Edit</a> -->
                   </div>
@@ -406,6 +408,88 @@
 
                   <!-- Body -->
                   <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <i class="tio-user-outlined nav-icon"></i><span class="mb-0" style="font-weight: bolder;color: black;"> Full Name</span>
+                    </div>
+                    <div class="col-sm-9 text-secondary" id="name">
+                      
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <i class="tio-online nav-icon"></i>
+                      <span class="mb-0" style="font-weight: bolder;color: black;"> Email Address</span>
+                    </div>
+                    <div class="col-sm-9 text-secondary" id="email">
+                    
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <i class="tio-android-phone-vs nav-icon"></i><span class="mb-0" style="font-weight: bolder;color: black;"> Contact Number</span>
+                    </div>
+                    <div class="col-sm-9 text-secondary" id="contact">
+                    
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <i class="tio-shop-outlined nav-icon"></i><span class="mb-0" style="font-weight: bolder;color: black;"> Store Name</span>
+                    </div>
+                    <div class="col-sm-9 text-secondary" id="store">
+                     
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                       <i class="tio-briefcase-outlined nav-icon"></i><span class="mb-0" style="font-weight: bolder;color: black;"> Company Name</span>
+                    </div>
+                    <div class="col-sm-9 text-secondary" id="company">
+                     
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <i class="tio-home-vs-1-outlined nav-icon"></i><span class="mb-0" style="font-weight: bolder;color: black;"> Address</span>
+                    </div>
+                    <div class="col-sm-9 text-secondary" id="address">
+                      
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <i class="tio-account-circle nav-icon"></i><span class="mb-0" style="font-weight: bolder;color: black;"> City, State</span>
+                    </div>
+                    <div class="col-sm-9 text-secondary" id="cityState">
+                      
+                    </div>
+                  </div>
+                  <!-- <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <i class="tio-account-circle nav-icon"></i><span class="mb-0" style="font-weight: bolder;color: black;"> State</span>
+                    </div>
+                    <div class="col-sm-9 text-secondary" id="state">
+                      
+                    </div>
+                  </div> -->
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <i class="tio-credit-cards nav-icon"></i><span class="mb-0" style="font-weight: bolder;color: black;"> ZipCode</span>
+                    </div>
+                    <div class="col-sm-9 text-secondary" id="zipcode">
+                      
+                    </div>
+                  </div>
+                  <!-- <div class="card-body">
                     <ul class="list-unstyled list-unstyled-py-3 text-dark mb-3">
                       <li class="py-0">
                         <small class="card-subtitle">About</small>
@@ -422,9 +506,9 @@
                       <li id="store">
                         <i class="tio-shop-outlined nav-icon"></i>
                       
-                      </li>
+                      </li> -->
 
-                      <li class="pt-2 pb-0">
+                      <!-- <li class="pt-2 pb-0">
                         <small class="card-subtitle">Contacts</small>
                       </li>
 
@@ -435,7 +519,7 @@
                       <li id="contact">
                         <i class="tio-android-phone-vs nav-icon"></i>
                        
-                      </li>
+                      </li> -->
 
                       <!-- <li class="pt-2 pb-0">
                         <small class="card-subtitle">Teams</small>
@@ -449,7 +533,7 @@
                         <i class="tio-briefcase-outlined nav-icon"></i>
                         You are not working on any projects
                       </li> -->
-                    </ul>
+                    <!-- </ul> -->
                   </div>
                   <!-- End Body -->
                 </div>
@@ -458,9 +542,9 @@
 
 
                 <!-- Card -->
-                <div class="card card-lg mb-3 mb-lg-5">
+                <!-- <div class="card card-lg mb-3 mb-lg-5"> -->
                   <!-- Body -->
-                  <div class="card-body text-center">
+                 <!--  <div class="card-body text-center">
                     <div class="w-50 mx-auto mb-4">
                       <img class="img-fluid" src="./assets/svg/illustrations/unlock.svg" alt="Image Description">
                     </div>
@@ -471,30 +555,30 @@
                     </div>
 
                     <a class="btn btn-primary">Request Now</a>
-                  </div>
+                  </div> -->
                   <!-- End Body -->
-                </div>
+                <!-- </div> -->
                 <!-- End Card -->
-              </div>
+              <!-- </div> -->
 
-              <div class="col-lg-8">
+              <!-- <div class="col-lg-8"> -->
                 <!-- Card -->
-                <div class="card mb-3 mb-lg-5">
+                <!-- <div class="card mb-3 mb-lg-5"> -->
                   <!-- Header -->
-                  <div class="card-header">
-                    <h2 class="card-header-title h5">Activity stream</h2>
+                  <!-- <div class="card-header">
+                    <h2 class="card-header-title h5">Activity stream</h2> -->
 
                     <!-- Unfold -->
-                    <div class="hs-unfold">
+                   <!--  <div class="hs-unfold">
                       <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-ghost-secondary rounded-circle" href="javascript:;"
                          data-hs-unfold-options='{
                            "target": "#contentActivityStreamDropdown",
                            "type": "css-animation"
                          }'>
                         <i class="tio-more-vertical"></i>
-                      </a>
+                      </a> -->
 
-                      <div id="contentActivityStreamDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
+                     <!--  <div id="contentActivityStreamDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
                         <span class="dropdown-header">Settings</span>
 
                         <a class="dropdown-item" href="#">
@@ -512,19 +596,19 @@
                           <i class="tio-chat-outlined dropdown-item-icon"></i> Report
                         </a>
                       </div>
-                    </div>
+                    </div> -->
                     <!-- End Unfold -->
-                  </div>
+                <!--   </div> -->
                   <!-- End Header -->
 
                   <!-- Body -->
-                  <div class="card-body card-body-height card-body-centered">
+                 <!--  <div class="card-body card-body-height card-body-centered">
                     <img class="avatar avatar-xxl mb-3" src="./assets/svg/illustrations/yelling.svg" alt="Image Description">
-                    <p class="card-text">No data to show</p>
+                    <p class="card-text">No data to show</p> -->
                    <!--  <a class="btn btn-sm btn-white" href="#">Start your Activity</a> -->
-                  </div>
+                 <!--  </div> -->
                   <!-- End Body -->
-                </div>
+              <!--   </div> -->
                 <!-- End Card -->
 
                 <!-- Card -->
